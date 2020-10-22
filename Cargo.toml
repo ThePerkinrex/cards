@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "cards_protocol",
+	"cards_server",
+	"cards_client"
+]
