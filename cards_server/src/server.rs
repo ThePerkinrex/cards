@@ -2,7 +2,6 @@ use crate::game::Game;
 
 use smol::{net, prelude::*};
 use cards_protocol as proto;
-use proto::{RecvValue, SendValue};
 
 
 pub fn run(games: Vec<Game>) -> ! {
@@ -20,15 +19,20 @@ pub fn run(games: Vec<Game>) -> ! {
 	})
 }
 
-async fn handle(mut stream: net::TcpStream) -> ! {
-	println!("Connected to: {}", stream.peer_addr().unwrap());
-	
+async fn handle(stream: net::TcpStream) -> () {
+	let addr = stream.peer_addr().unwrap();
+	println!("Connected to: {}", addr);
+	let mut server = proto::ServerProtocolStream::new(stream);
 	loop {
-		match RecvValue::<proto::Request>::recv_val(&mut stream).await {
+		match server.recv().await {
 			Ok(req) => {
 				println!("{:?}", req);
 			}
 			Err(e) => println!("{:?}", e)
 		}
+		if server.should_close() {
+			break
+		}
 	}
+	println!("Closing connection to {}", addr);
 }
