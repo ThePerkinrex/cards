@@ -1,4 +1,0 @@
-INFO  [2020-10-24 14:12:44] [web_server] Listening on port 25566
-INFO  [2020-10-24 14:12:52] [handle_connection(uuid: dd610e7e-f6e9-4793-af6f-beb4faa3c2b7)] Connected to 127.0.0.1:47872
-INFO  [2020-10-24 14:12:52] [handle_connection(uuid: dd610e7e-f6e9-4793-af6f-beb4faa3c2b7)] Games
-INFO  [2020-10-24 14:12:52] [handle_connection(uuid: dd610e7e-f6e9-4793-af6f-beb4faa3c2b7)] Disconnected from 127.0.0.1:47872
