@@ -126,10 +126,53 @@ impl Game {
             // }
 		});
 		Self {name, version, lua}
-	}
+    }
+    
+    pub fn name(&self) -> &String {
+        &self.name
+    }
+
+    pub fn version(&self) -> &String {
+        &self.version
+    }
+
+    pub fn thread_safe(&self) -> ThreadSafeGame {
+        ThreadSafeGame {
+            name: self.name().clone(),
+            version: self.version().clone()
+        }
+    }
 }
 
 impl std::fmt::Display for Game {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} [{}]", self.name, self.version)
+    }
+}
+
+impl std::fmt::Debug for Game {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} [{}]", self.name, self.version)
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct ThreadSafeGame {
+    name: String,
+    version: String
+}
+
+impl ThreadSafeGame {    
+    pub fn name(&self) -> &String {
+        &self.name
+    }
+
+    pub fn version(&self) -> &String {
+        &self.version
+    }
+}
+
+impl std::fmt::Display for ThreadSafeGame {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{} [{}]", self.name, self.version)
     }

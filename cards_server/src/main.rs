@@ -2,8 +2,14 @@ use std::fs::read_dir;
 
 mod game;
 mod server;
+mod tracing_subscriber;
+
+
 
 fn main() {
+    tracing::subscriber::set_global_default(tracing_subscriber::CustomSubscriber::new(true, &["cards_server::server"])).unwrap();
+
+    
     // Look for each game
     let mut games = Vec::new();
     for file in read_dir("games").unwrap() {
@@ -19,6 +25,6 @@ fn main() {
             }
         }
     }
-    println!("[{}]", games.iter().map(|x|x.to_string()).rev().fold(String::new(), |s, x| format!("{}, {}", x, s)));
+    // println!("[{}]", games.iter().map(|x|x.to_string()).rev().fold(String::new(), |s, x| format!("{}, {}", x, s)));
     server::run(games);
 }
