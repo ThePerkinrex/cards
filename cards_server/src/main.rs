@@ -2,14 +2,15 @@ use std::fs::read_dir;
 
 mod game;
 mod server;
-mod tracing_subscriber;
-
-
 
 fn main() {
-    tracing::subscriber::set_global_default(tracing_subscriber::CustomSubscriber::new(true, &["cards_server::server"])).unwrap();
+    tracing::subscriber::set_global_default(cards_subscriber::Subscriber::new(
+        "logs/server",
+        &["cards_server::server"],
+        true,
+    ))
+    .unwrap();
 
-    
     // Look for each game
     let mut games = Vec::new();
     for file in read_dir("games").unwrap() {

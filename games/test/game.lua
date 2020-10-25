@@ -1,6 +1,6 @@
 -- require "deepcopy"
 
-name = "TETS"
+name = "TEST"
 version = "1.0.0"
 players = {2, 10}
 

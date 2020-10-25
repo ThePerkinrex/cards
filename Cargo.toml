@@ -3,5 +3,6 @@
 members = [
     "cards_protocol",
 	"cards_server",
-	"cards_client"
+	"cards_client",
+	"cards_subscriber"
 ]
